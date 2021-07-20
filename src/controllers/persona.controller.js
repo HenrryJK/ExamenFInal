@@ -1,7 +1,7 @@
 import { response } from 'express'
 import {pool} from '../database'
 const helpers = require('../libs/helpers');
-export const readAllUsers = async(req , res ) => {
+export const readAllPersonas = async(req , res ) => {
     try {
         const response = await pool.query('select * from persona');
         return res.status(200).json(response.rows);
@@ -11,7 +11,7 @@ export const readAllUsers = async(req , res ) => {
     }
 }
 
-export const delUser = async (req , res) => {
+export const delPersona = async (req , res) => {
     try {
         const id = parseInt(req.params.id);
         const response = await pool.query('delete from persona where idpersona=$1', [id]);
@@ -26,7 +26,7 @@ export const delUser = async (req , res) => {
 
 }
 
-export const createUser = async(req, res)=>{
+export const createPersona = async(req, res)=>{
     try {
         const{ nombre, apellido , telefono} = req.body;
         await pool.query('insert into persona(nombre, apellido, telefon) values($1,$2, $3)', [nombre, apellido ,telefono]);
